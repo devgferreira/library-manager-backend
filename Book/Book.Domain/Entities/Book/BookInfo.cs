@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Book.Domain.Entities
+namespace Book.Domain.Entities.Book
 {
     public class BookInfo
     {

@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Book.Domain;
-using Book.Domain.Entities;
+using Book.Domain.Entities.Book;
+using Book.Domain.Entities.Book.Request;
 
 namespace Book.Domain.Contracts
 {
@@ -13,6 +14,6 @@ namespace Book.Domain.Contracts
         Task<BookInfo> InsertAsync();
         Task<BookInfo> UpdateAsync();
         Task DeleteAsync(int bookId);
-        Task<BookInfo> SelectBook(string title, string author, string genre, string isbn);
+        Task<BookInfo> SelectBook(BookRequest request);
     }
 }
