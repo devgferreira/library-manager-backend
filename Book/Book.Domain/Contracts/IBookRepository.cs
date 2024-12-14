@@ -11,9 +11,9 @@ namespace Book.Domain.Contracts
 {
     public interface IBookRepository
     {
-        Task<BookInfo> InsertAsync();
+        Task InsertAsync(BookInfo request);
         Task<BookInfo> UpdateAsync();
         Task DeleteAsync(int bookId);
-        Task<BookInfo> SelectBook(BookRequest request);
+        Task<List<BookInfo>> SelectBook(BookRequest request);
     }
 }
