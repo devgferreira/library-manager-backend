@@ -3,6 +3,7 @@ using Book.Domain.Entities.Book;
 using Book.Domain.Entities.Book.Request;
 using Book.Infra.Data.Context;
 using Dapper;
+using MySqlX.XDevAPI;
 using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Collections.Generic;
@@ -74,9 +75,34 @@ namespace Book.Infra.Data.Repository
             }
         }
 
-        public Task<BookInfo> UpdateAsync()
+        public async Task UpdateAsync(int bookId, BookInfo request)
         {
-            throw new NotImplementedException();
+            using(var session = _session.Connection)
+            {
+                string query = @"UPDATE BOOK
+                                SET TITLE = @Title, 
+                                    AUTHOR = @Author, 
+                                    GENRE = @Genre, 
+                                    ISBN = @ISBN, 
+                                    PUBLICATIONYEAR = @ublicationYear, 
+                                    PUBLISHER = @Publisher, 
+                                    QUANTITYAVAILABLE = @QuantityAvailable, 
+                                    LIBRARYLOCATION = @LibraryLocation
+                                WHERE ID = @BookID "
+                ;
+                await session.ExecuteAsync(sql: query, param: new
+                {
+                    Title = request.Title,
+                    Author = request.Author,
+                    Genre = request.Genre,
+                    ISBN = request.ISBN,
+                    PublicationYear = request.PublicationYear,
+                    Publisher = request.Publisher,
+                    QuantityAvailable = request.QuantityAvailable,
+                    LibraryLocation = request.LibraryLocation,
+                    BookID = bookId
+                });
+            }
         }
     }
 }

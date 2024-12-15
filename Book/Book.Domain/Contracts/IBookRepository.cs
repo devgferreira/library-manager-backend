@@ -12,7 +12,7 @@ namespace Book.Domain.Contracts
     public interface IBookRepository
     {
         Task InsertAsync(BookInfo request);
-        Task<BookInfo> UpdateAsync();
+        Task UpdateAsync(int bookId, BookInfo request);
         Task DeleteAsync(int bookId);
         Task<List<BookInfo>> SelectBook(BookRequest request);
     }
