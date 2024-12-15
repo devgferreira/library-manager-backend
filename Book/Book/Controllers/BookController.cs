@@ -20,7 +20,7 @@ namespace Book.Controllers
         }
 
         [HttpPost(Name = "Adicionar Livro")]
-        public async Task<ActionResult> InsertBook(BookCreateDTO request)
+        public async Task<ActionResult> InsertBook(BookDTO request)
         {
             if (_bookService == null)
                 return BadRequest("Invalid Data");

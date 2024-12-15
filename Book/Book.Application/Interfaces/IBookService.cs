@@ -1,4 +1,6 @@
 ﻿using Book.Application.DTOs.Book;
+using Book.Domain.Entities.Book;
+using Book.Domain.Entities.Book.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,9 @@ namespace Book.Application.Interfaces
 {
     public interface IBookService
     {
-        Task InsertAsync(BookCreateDTO request);
+        Task InsertAsync(BookDTO request);
+        Task DeleteAsync(int bookId);
+        Task UpdateAsync(int bookId, BookDTO request);
+        Task<List<BookGetDTO>> SelectBook(BookRequest request);
     }
 }

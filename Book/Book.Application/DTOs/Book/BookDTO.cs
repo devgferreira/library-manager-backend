@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Book.Application.DTOs.Book
 {
-    public class BookCreateDTO
+    public class BookDTO
     {
         public string Title { get; set; }
         public string Author { get; set; }
@@ -18,7 +18,7 @@ namespace Book.Application.DTOs.Book
         public double QuantityAvailable { get; set; }
         public string LibraryLocation { get; set; }
 
-        public BookCreateDTO(string title, string author, string genre, string iSBN, int publicationYear, string publisher, double quantityAvailable, string libraryLocation)
+        public BookDTO(string title, string author, string genre, string iSBN, int publicationYear, string publisher, double quantityAvailable, string libraryLocation)
         {
             Title = title;
             Author = author;

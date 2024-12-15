@@ -2,6 +2,7 @@
 using Book.Application.Interfaces;
 using Book.Domain.Contracts;
 using Book.Domain.Entities.Book;
+using Book.Domain.Entities.Book.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,12 @@ namespace Book.Application.Service
             _bookRepository = bookRepository;
         }
 
-        public async Task InsertAsync(BookCreateDTO request)
+        public Task DeleteAsync(int bookId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task InsertAsync(BookDTO request)
         {
             try
             {
@@ -41,6 +47,16 @@ namespace Book.Application.Service
             {
                 Console.WriteLine(ex.Message.ToString());
             }
+        }
+
+        public Task<List<BookGetDTO>> SelectBook(BookRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateAsync(int bookId, BookDTO request)
+        {
+            throw new NotImplementedException();
         }
     }
 }

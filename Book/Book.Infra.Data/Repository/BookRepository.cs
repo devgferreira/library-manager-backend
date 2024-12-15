@@ -68,7 +68,7 @@ namespace Book.Infra.Data.Repository
                 if (request.ISBN != null)
                     query.Append(" AND ISBN = @ISBN ");
                 if (request.PublicationYearStart != null && request.PublicationYearEnd != null)
-                    query.Append(" AND PUBLICATIONYEAR BETWEEN @PublicationYearStart AND @PublicationYearEnd");
+                    query.Append(" AND PUBLICATIONYEAR BETWEEN @PublicationYearStart AND @PublicationYearEnd ");
 
                 var result = await session.QueryAsync<BookInfo>(sql: query.ToString(), param: request);
                 return result.ToList();
@@ -84,7 +84,7 @@ namespace Book.Infra.Data.Repository
                                     AUTHOR = @Author, 
                                     GENRE = @Genre, 
                                     ISBN = @ISBN, 
-                                    PUBLICATIONYEAR = @ublicationYear, 
+                                    PUBLICATIONYEAR = @PublicationYear, 
                                     PUBLISHER = @Publisher, 
                                     QUANTITYAVAILABLE = @QuantityAvailable, 
                                     LIBRARYLOCATION = @LibraryLocation
