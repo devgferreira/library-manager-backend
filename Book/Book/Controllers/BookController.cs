@@ -51,6 +51,16 @@ namespace Book.Controllers
 
             return Ok(result);
         }
+        [HttpGet(Name = "Buscar Livros")]
+        [Route("/{bookId}")]
+        public async Task<ActionResult<List<BookGetDTO>>> UpdateBook([FromBody] BookDTO request,[FromRoute] int bookId)
+        {
+            if (_bookService == null)
+                return BadRequest("Invalid Data");
 
+            await _bookService.UpdateAsync(bookId, request);
+
+            return Ok("Livro atualizado com sucesso!!");
+        }
     }
 }
