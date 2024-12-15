@@ -41,13 +41,13 @@ namespace Book.Controllers
             return Ok("Livro deletado com sucesso!!");
         }
 
-        [HttpDelete(Name = "Buscar Livros")]
+        [HttpGet(Name = "Buscar Livros")]
         public async Task<ActionResult<List<BookGetDTO>>> SelectBook([FromQuery]BookRequest request)
         {
             if (_bookService == null)
                 return BadRequest("Invalid Data");
 
-           var result =  await _bookService.SelectBook(request);
+            var result =  await _bookService.SelectBook(request);
 
             return Ok(result);
         }
