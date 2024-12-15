@@ -1,5 +1,6 @@
 using Book.Application.DTOs.Book;
 using Book.Application.Interfaces;
+using Book.Domain.Entities.Book.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Book.Controllers
@@ -20,7 +21,7 @@ namespace Book.Controllers
         }
 
         [HttpPost(Name = "Adicionar Livro")]
-        public async Task<ActionResult> InsertBook(BookDTO request)
+        public async Task<ActionResult> InsertBook([FromBody] BookDTO request)
         {
             if (_bookService == null)
                 return BadRequest("Invalid Data");
@@ -39,5 +40,17 @@ namespace Book.Controllers
 
             return Ok("Livro deletado com sucesso!!");
         }
+
+        [HttpDelete(Name = "Buscar Livros")]
+        public async Task<ActionResult<List<BookGetDTO>>> SelectBook([FromQuery]BookRequest request)
+        {
+            if (_bookService == null)
+                return BadRequest("Invalid Data");
+
+           var result =  await _bookService.SelectBook(request);
+
+            return Ok(result);
+        }
+
     }
 }
