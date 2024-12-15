@@ -13,7 +13,6 @@ namespace Book.Infra.Data.Context
             Connection = new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
             Connection.Open();
         }
-
         public void Dispose() => Connection?.Dispose();
         
     }

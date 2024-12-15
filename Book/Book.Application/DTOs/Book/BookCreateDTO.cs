@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Book.Domain.Entities.Book;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Book.Domain.Entities.Book
+namespace Book.Application.DTOs.Book
 {
-    public class BookInfo
+    public class BookCreateDTO
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
         public string Genre { get; set; }
@@ -18,9 +18,8 @@ namespace Book.Domain.Entities.Book
         public double QuantityAvailable { get; set; }
         public string LibraryLocation { get; set; }
 
-        public BookInfo(int id, string title, string author, string genre, string iSBN, int publicationYear, string publisher, double quantityAvailable, string libraryLocation)
+        public BookCreateDTO(string title, string author, string genre, string iSBN, int publicationYear, string publisher, double quantityAvailable, string libraryLocation)
         {
-            Id = id;
             Title = title;
             Author = author;
             Genre = genre;
@@ -29,10 +28,6 @@ namespace Book.Domain.Entities.Book
             Publisher = publisher;
             QuantityAvailable = quantityAvailable;
             LibraryLocation = libraryLocation;
-        }
-
-        public BookInfo()
-        {
         }
     }
 }
