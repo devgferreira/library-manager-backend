@@ -20,9 +20,17 @@ namespace Book.Application.Service
             _bookRepository = bookRepository;
         }
 
-        public Task DeleteAsync(int bookId)
+        public async Task DeleteAsync(int bookId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _bookRepository.DeleteAsync(bookId);
+                return;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
         }
 
         public async Task InsertAsync(BookDTO request)
