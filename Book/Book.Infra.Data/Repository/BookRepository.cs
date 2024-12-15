@@ -3,6 +3,7 @@ using Book.Domain.Entities.Book;
 using Book.Domain.Entities.Book.Request;
 using Book.Infra.Data.Context;
 using Dapper;
+using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,15 @@ namespace Book.Infra.Data.Repository
             _session = session;
         }
 
-        public Task DeleteAsync(int bookId)
+        public async Task DeleteAsync(int bookId)
         {
-            throw new NotImplementedException();
+            using (var session = _session.Connection)
+            {
+                string query = @"DELETE FROM BOOK WHERE ID = @BookId"
+                ;
+
+                await session.ExecuteAsync(sql: query, param: bookId);
+            }
         }
 
         public async Task InsertAsync(BookInfo request)
