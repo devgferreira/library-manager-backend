@@ -26,10 +26,12 @@ namespace Book.Infra.Data.Repository
         {
             using (var session = _session.Connection)
             {
-                string query = @"DELETE FROM BOOK WHERE ID = @BookId"
-                ;
+                string query = @"DELETE FROM Book WHERE Id = @BookId";
 
-                await session.ExecuteAsync(sql: query, param: bookId);
+                await session.ExecuteAsync(sql: query, param: new
+                {
+                    BookId = bookId
+                });
             }
         }
 
@@ -56,7 +58,7 @@ namespace Book.Infra.Data.Repository
                 var  query = new StringBuilder( @"SELECT 
                                     ID, TITLE, AUTHOR, GENRE, ISBN, PUBLICATIONYEAR, 
                                     PUBLISHER, QUANTITYAVAILABLE, LIBRARYLOCATION 
-                                FROM BOOK
+                                FROM Book
                                 WHERE 1 = 1 ");
 
                 if (request.Title != null)
@@ -79,7 +81,7 @@ namespace Book.Infra.Data.Repository
         {
             using(var session = _session.Connection)
             {
-                string query = @"UPDATE BOOK
+                string query = @"UPDATE Book
                                 SET TITLE = @Title, 
                                     AUTHOR = @Author, 
                                     GENRE = @Genre, 

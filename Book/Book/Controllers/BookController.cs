@@ -30,7 +30,7 @@ namespace Book.Controllers
 
             return Ok("Livro criado com sucesso!!");
         }
-        [HttpDelete(Name = "Deletar Livro")]
+        [HttpDelete("{bookId:int}", Name = "Deletar Livro")]
         public async Task<ActionResult> DeleteBook(int bookId)
         {
             if (_bookService == null)
@@ -51,8 +51,7 @@ namespace Book.Controllers
 
             return Ok(result);
         }
-        [HttpPut(Name = "Buscar Livros")]
-        [Route("/{bookId}")]
+        [HttpPut("{bookId:int}", Name = "Atualizar Livros")]
         public async Task<ActionResult<List<BookGetDTO>>> UpdateBook([FromBody] BookDTO request,[FromRoute] int bookId)
         {
             if (_bookService == null)
