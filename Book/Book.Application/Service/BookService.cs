@@ -84,9 +84,26 @@ namespace Book.Application.Service
             }
         }
 
-        public Task UpdateAsync(int bookId, BookDTO request)
+        public async Task UpdateAsync(int bookId, BookDTO request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _bookRepository.UpdateAsync(bookId, new BookInfo
+                {
+                    Title = request.Title,
+                    Author = request.Author,
+                    Genre = request.Genre,
+                    ISBN = request.ISBN,
+                    PublicationYear = request.PublicationYear,
+                    Publisher = request.Publisher,
+                    QuantityAvailable = request.QuantityAvailable,
+                    LibraryLocation = request.LibraryLocation
+                });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
