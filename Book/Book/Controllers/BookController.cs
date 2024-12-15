@@ -29,5 +29,15 @@ namespace Book.Controllers
 
             return Ok("Livro criado com sucesso!!");
         }
+        [HttpDelete(Name = "Deletar Livro")]
+        public async Task<ActionResult> DeleteBook(int bookId)
+        {
+            if (_bookService == null)
+                return BadRequest("Invalid Data");
+
+            await _bookService.DeleteAsync(bookId);
+
+            return Ok("Livro deletado com sucesso!!");
+        }
     }
 }
