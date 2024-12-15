@@ -31,5 +31,6 @@ namespace Book.Application.DTOs.Book
             QuantityAvailable = quantityAvailable;
             LibraryLocation = libraryLocation;
         }
+        public BookGetDTO() { }
     }
 }

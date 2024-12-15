@@ -6,6 +6,7 @@ using Book.Domain.Entities.Book.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -57,9 +58,30 @@ namespace Book.Application.Service
             }
         }
 
-        public Task<List<BookGetDTO>> SelectBook(BookRequest request)
+        public async Task<List<BookGetDTO>> SelectBook(BookRequest request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var books = await _bookRepository.SelectBook(request);
+                var bookDTOs = books.Select(book => new BookGetDTO
+                {
+                    Id = book.Id,
+                    Title = book.Title,
+                    Author = book.Author,
+                    Genre = book.Genre,
+                    ISBN = book.ISBN,
+                    PublicationYear = book.PublicationYear,
+                    Publisher = book.Publisher,
+                    QuantityAvailable = book.QuantityAvailable,
+                    LibraryLocation = book.LibraryLocation
+                }).ToList();
+
+                return bookDTOs;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public Task UpdateAsync(int bookId, BookDTO request)
