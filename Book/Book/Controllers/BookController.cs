@@ -51,7 +51,7 @@ namespace Book.Controllers
 
             return Ok(result);
         }
-        [HttpGet(Name = "Buscar Livros")]
+        [HttpPut(Name = "Buscar Livros")]
         [Route("/{bookId}")]
         public async Task<ActionResult<List<BookGetDTO>>> UpdateBook([FromBody] BookDTO request,[FromRoute] int bookId)
         {
