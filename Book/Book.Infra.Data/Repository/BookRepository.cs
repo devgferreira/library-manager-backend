@@ -48,9 +48,30 @@ namespace Book.Infra.Data.Repository
             }
         }
 
-        public Task<List<BookInfo>> SelectBook(BookRequest request)
+        public async Task<List<BookInfo>> SelectBook(BookRequest request)
         {
-            throw new NotImplementedException();
+            using (var session = _session.Connection)
+            {
+                var  query = new StringBuilder( @"SELECT 
+                                    ID, TITLE, AUTHOR, GENRE, ISBN, PUBLICATIONYEAR, 
+                                    PUBLISHER, QUANTITYAVAILABLE, LIBRARYLOCATION 
+                                FROM BOOK
+                                WHERE 1 = 1 ");
+
+                if (request.Title != null)
+                    query.Append(" AND TITLE = @Title ");
+                if (request.Author != null) 
+                    query.Append(" AND AUTHOR = @Author ");
+                if (request.Genre != null)
+                    query.Append(" AND GENRE = @Genre ");
+                if (request.ISBN != null)
+                    query.Append(" AND ISBN = @ISBN ");
+                if (request.PublicationYearStart != null && request.PublicationYearEnd != null)
+                    query.Append(" AND PUBLICATIONYEAR BETWEEN @PublicationYearStart AND @PublicationYearEnd");
+
+                var result = await session.QueryAsync<BookInfo>(sql: query.ToString(), param: request);
+                return result.ToList();
+            }
         }
 
         public Task<BookInfo> UpdateAsync()
